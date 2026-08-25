@@ -18,7 +18,7 @@
   <p>Trabalho apresentado ao Instituto Infnet como requisito parcial para obtenção de grau no Teste de Performance 1 (TP1) do Projeto de Bloco.</p>
   <p><b>Professor:</b> Tiago Xavier</p>
   <p><b>Aluno:</b> Miguel Andrade Wiest de São Pedro</p>
-  <p><b>Link do Repositório Git:</b> <a href="https://github.com/miguel-pedro/miguel_pb_tp1">https://github.com/miguel/miguel_pb_tp1</a></p>
+  <p><b>Link do Repositório Git:</b> <a href="https://github.com/miguelwiest/miguel-pb-ai-security">https://github.com/miguelwiest/miguel-pb-ai-security</a></p>
 </div>
 
 <br><br><br><br><br><br><br><br>
@@ -35,7 +35,7 @@
 - **Nome do Aluno:** Miguel Andrade Wiest de São Pedro
 - **E-mail do Aluno:** miguela.pedro@al.infnet.edu.br
 - **E-mail do Professor:** tiago.xavier@prof.infnet.edu.br
-- **Repositório Git:** [https://github.com/miguel/miguel_pb_tp1](https://github.com/miguel/miguel_pb_tp1)
+- **Repositório Git:** [https://github.com/miguelwiest/miguel-pb-ai-security](https://github.com/miguelwiest/miguel-pb-ai-security)
 - **Nome do Arquivo PDF no Moodle:** `miguel_pedro_PB_TP1.PDF` (ou `miguel_saopedro_PB_TP1.PDF`)
 
 ---
