@@ -6,7 +6,7 @@ import jwt
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 
-from models.schemas import TokenData, User, UserInDB
+from models.schemas import User, UserInDB
 
 # Configurações de Segurança do JWT
 SECRET_KEY = os.getenv("JWT_SECRET_KEY", "pb_infnet_super_secret_jwt_key_2026_x9a8b7c6")
@@ -37,22 +37,21 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 ADMIN_PASSWORD_PLAIN = "AdminInfnet2026!"
 ADMIN_PASSWORD_HASH = get_password_hash(ADMIN_PASSWORD_PLAIN)
 
-USERS_DB = {
-    "admin": {
-        "username": "admin",
-        "email": "admin@infnet.edu.br",
-        "full_name": "Administrador do Atendimento IA",
-        "disabled": False,
-        "hashed_password": ADMIN_PASSWORD_HASH
-    }
+USERS_DB: dict[str, UserInDB] = {
+        "admin": UserInDB(
+            username="admin",
+            email="admin@infnet.edu.br",
+            full_name="Administrador do Atendimento IA",
+            disabled=False,
+            hashed_password=ADMIN_PASSWORD_HASH
+        )
 }
 
 
 def get_user(db: dict, username: str) -> Optional[UserInDB]:
     """Recupera os dados de um usuário na base in-code."""
     if username in db:
-        user_dict = db[username]
-        return UserInDB(**user_dict)
+        return db[username]
     return None
 
 
@@ -79,27 +78,28 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -
     return encoded_jwt
 
 
-def verify_token(token: str, credentials_exception: HTTPException) -> TokenData:
-    """Decodifica e valida o token JWT."""
+def verify_token(token: str) -> Optional[str]:
+    """Decodifica, valida e extrai 'sub' presente no header do token JWT."""
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username: str = payload.get("sub")
-        if username is None:
-            raise credentials_exception
-        return TokenData(username=username)
+        return username
     except jwt.PyJWTError:
-        raise credentials_exception
+        return None
 
 
-async def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
+async def get_token_user(token: str = Depends(oauth2_scheme)) -> User:
     """Dependência FastAPI que extrai e valida o usuário a partir do token JWT."""
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Credenciais inválidas ou token expirado/ausente",
         headers={"WWW-Authenticate": "Bearer"},
     )
-    token_data = verify_token(token, credentials_exception)
-    user = get_user(USERS_DB, username=token_data.username)
+
+    username = verify_token(token)
+    if username is None:
+        raise credentials_exception
+    user = get_user(USERS_DB, username)
     if user is None:
         raise credentials_exception
     if user.disabled:

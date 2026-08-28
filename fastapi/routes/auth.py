@@ -8,7 +8,7 @@ from security.auth import (
     USERS_DB,
     authenticate_user,
     create_access_token,
-    get_current_user
+    get_token_user
 )
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
@@ -31,16 +31,15 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Nome de usuário ou senha incorretos",
-            headers={"WWW-Authenticate": "Bearer"},
         )
-    
+
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": user.username, "email": user.email},
+        data={"sub": user.username},
         expires_delta=access_token_expires
     )
-    
-    return Token(access_token=access_token, token_type="bearer")
+
+    return Token(access_token=access_token, token_type="Bearer")
 
 
 @router.get(
@@ -49,5 +48,5 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     summary="Consultar usuário autenticado",
     description="Retorna informações do perfil autenticado pelo token JWT."
 )
-async def read_users_me(current_user: User = Depends(get_current_user)):
+async def read_users_me(current_user: User = Depends(get_token_user)):
     return current_user

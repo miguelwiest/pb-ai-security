@@ -8,10 +8,6 @@ class Token(BaseModel):
     token_type: str = Field(default="bearer", description="Tipo de autenticação do token")
 
 
-class TokenData(BaseModel):
-    username: Optional[str] = Field(default=None, description="Nome de usuário contido no payload do JWT")
-
-
 class User(BaseModel):
     username: str = Field(..., description="Identificador único do usuário", json_schema_extra={"examples": ["admin"]})
     email: Optional[str] = Field(default=None, description="Email cadastrado", json_schema_extra={"examples": ["admin@infnet.edu.br"]})

@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, status
 
 from models.schemas import PredictRequest, PredictResponse, User
-from security.auth import get_current_user
+from security.auth import get_token_user
 
 router = APIRouter(tags=["Machine Learning Prediction"])
 
@@ -37,14 +37,14 @@ def mock_classify_intent(text: str) -> tuple[str, float]:
 )
 async def predict_ticket_intent(
     request: PredictRequest,
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_token_user)
 ):
     """
     Endpoint autenticado para classificação de tickets.
     Exige cabeçalho `Authorization: Bearer <token_jwt>`.
     """
     intent, confidence = mock_classify_intent(request.text)
-    
+
     return PredictResponse(
         input_text=request.text,
         predicted_intent=intent,
