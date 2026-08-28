@@ -1,0 +1,9 @@
+Triade CIA componentes do sistema,,,
+Componente/Rota,Confidencialidade (C),Integridade (I),Disponibilidade (A)
+Cliente/Admin,Alta: Credenciais de acesso e dados sensiveis,Media/Alta: Transeferencia de dados deve ser protegida por TLS para garantir que dados nao sejam alterados,"Media: Clientes devem ter acesso continuo a API, com restricoes apenas em caso de erros de requisicao"
+GET /health,Baixa: Rota publica que apenas reporta status da API,Alta: Status deve refletir a situacao da API corretamente,Alta: Sempre disponivel enquanto a API esta disponivel
+POST /auth/token,Alta: Interacao direta com credenciais de usuarios,Alta: Garante a emissao correta para tokens de acesso JWT,Alta: Rota intermediaria entre o cliente e qualquer outra rota protegida por token de acesso
+POST /predict,Alta: Input em texto para inferencia pode conter dados sensiveis do usuario,"Media/Alta: Classificacao e score da resposta deve ser fiel a inferencia gerada, porem a inferencia pode ser imprecisa relativa ao input.",Alta: Rota alvo para multiplas requisicoes de cada usuario ja que em resumo ela corresponde a essencia do produto
+Emissor/Validador JWT,Alta: Trata as operacoes com tokens JWT necessarias para que os fluxos OAuth2 sejam implementados corretamente,"Alta: Garante que tokens gerados pela API ou nao, sejam corretamente indentificados",Alta: Sempre disponivel enquanto a API esteja rodando
+Usuario em memoria,"Alta: Dados sensiveis de usuarios, com senha protegida por hash bcrypt","Alta: Dados sao resetados na reinicializacao da API, porem dados sao integros ja que armazenados em memoria",Media: Dados presente em memoria enquanto a API esta funcionando
+Mock AI,"Baixa: Dados de resposta sao mockados (falsos), sempre os mesmos",Alta: Expectativa de resposta gerada sera sempre a mesma,Alta: Funcao mock (sem consulta real a uma modelo de IA)
