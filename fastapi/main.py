@@ -14,7 +14,6 @@ from routes import health_router, auth_router, predict_router
 app = FastAPI(
     title="Customer Support Ticket Intelligent API",
     description=(
-        "API para Atendimento ao Cliente com IA - Projeto de Bloco (TP1).\n\n"
         "Esta API disponibiliza endpoints para monitoramento de integridade, "
         "autenticação segura via OAuth2 com tokens JWT e inferência simulada "
         "de intenção de tickets de suporte baseados no 'Customer Support Ticket Dataset'."
@@ -53,4 +52,4 @@ async def root():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8089, reload=True)
