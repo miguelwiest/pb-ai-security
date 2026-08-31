@@ -1,10 +1,10 @@
-# 🚀 Sistema Inteligente de Atendimento ao Cliente - Projeto de Bloco (TP1)
+# Sistema Inteligente de Atendimento ao Cliente - Projeto de Bloco (TP1)
 
-Este repositório contém a entrega do **Trabalho Prático 1 (TP1)** do Projeto de Bloco (Inteligência Artificial e Segurança da Informação) do **Instituto Infnet**.
+Este repositório contém a entrega do **Trabalho Prático 1 (TP1)** do Projeto de Bloco (Análise e Segurança de Agentes de IA) do **Instituto Infnet**.
 
 ---
 
-## 🎯 Objetivo do Projeto
+## Objetivo do Projeto
 
 O objetivo deste projeto é estabelecer as bases estatísticas e arquiteturais para um **Sistema de Atendimento ao Cliente com IA**:
 1. **Exploração e Análise de Dados (EDA)**: Compreender o domínio de chamados de suporte técnico a partir do *Customer Support Ticket Dataset* (Kaggle), inspecionando qualidade, limpando dados e formulando hipóteses de negócio e modelagem.
@@ -13,10 +13,10 @@ O objetivo deste projeto é estabelecer as bases estatísticas e arquiteturais p
 
 ---
 
-## 📁 Estrutura do Repositório
+## Estrutura do Repositório
 
 ```text
-PB_IA_TP1/
+PROJETO/
 ├── README.md                          # Documentação geral, guia de instalação e execução
 ├── requirements.txt                   # Dependências completas do projeto
 ├── data/
@@ -47,7 +47,7 @@ PB_IA_TP1/
 
 ---
 
-## ⚙️ Instalação e Pré-requisitos
+## Instalação e Pré-requisitos
 
 ### 1. Clonar o repositório
 ```bash
@@ -73,7 +73,7 @@ pip install -r requirements.txt
 
 ---
 
-## 🚀 Como Executar a Aplicação
+## Como Executar a Aplicação
 
 ### Executando a API FastAPI
 
@@ -84,16 +84,16 @@ cd fastapi
 uvicorn main:app --reload
 ```
 
-A API estará acessível em: `http://127.0.0.1:8000`
+A API estará acessível em: `http://127.0.0.1:8089`
 
-- **Documentação Interativa (Swagger UI):** `http://127.0.0.1:8000/docs`
-- **Documentação Alternativa (ReDoc):** `http://127.0.0.1:8000/redoc`
+- **Documentação Interativa (Swagger UI):** `http://127.0.0.1:8089/docs`
+- **Documentação Alternativa (ReDoc):** `http://127.0.0.1:8089/redoc`
 
 ---
 
-## 🔒 Endpoints da API e Autenticação
+## Endpoints da API e Autenticação
 
-### 🔑 Credenciais do Usuário Administrador (In-Code)
+### Credenciais do Usuário Administrador (In-Code)
 Conforme requisito da entrega, a autenticação utiliza credenciais de um usuário admin in-code:
 - **Username:** `admin`
 - **Password:** `AdminInfnet2026!`
@@ -105,7 +105,7 @@ Verifica o status operacional e a integridade da API.
 - **Requisição:**
   ```http
   GET /health HTTP/1.1
-  Host: 127.0.0.1:8000
+  Host: 127.0.0.1:8089
   ```
 - **Resposta (200 OK):**
   ```json
@@ -124,7 +124,7 @@ Autentica o usuário administrador e retorna um token de acesso JWT (form-data).
 - **Requisição:**
   ```http
   POST /auth/token HTTP/1.1
-  Host: 127.0.0.1:8000
+  Host: 127.0.0.1:8089
   Content-Type: application/x-www-form-urlencoded
 
   username=admin&password=AdminInfnet2026!
@@ -145,7 +145,7 @@ Simula a inferência do modelo de Machine Learning que classifica a intenção d
 - **Requisição:**
   ```http
   POST /predict HTTP/1.1
-  Host: 127.0.0.1:8000
+  Host: 127.0.0.1:8089
   Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
   Content-Type: application/json
 
@@ -166,7 +166,7 @@ Simula a inferência do modelo de Machine Learning que classifica a intenção d
 
 ---
 
-## 🧪 Execução dos Testes Automatizados
+## Execução dos Testes Automatizados
 
 Para rodar a suíte de testes com `pytest`:
 
@@ -176,7 +176,7 @@ pytest tests/test_api.py -v
 
 ---
 
-## 📊 Análise Exploratória de Dados (EDA)
+## Análise Exploratória de Dados (EDA)
 
 O notebook `eda/eda.ipynb` cobre rigorosamente:
 1. **Compreensão do Domínio e Fonte do Dataset**: Kaggle (*Customer Support Ticket Dataset*).
@@ -191,7 +191,7 @@ O notebook `eda/eda.ipynb` cobre rigorosamente:
 
 ---
 
-## 🛡️ Modelagem de Segurança & Diagrama DFD
+## Modelagem de Segurança & Diagrama DFD
 
 O diagrama completo em alta resolução está disponível em [`others/dfd_api.png`](others/dfd_api.png).
 
@@ -206,8 +206,8 @@ O diagrama completo em alta resolução está disponível em [`others/dfd_api.pn
 
 ---
 
-## 🎓 Informações de Entrega (Infnet)
+## Informações de Entrega (Infnet)
 
 - **Professor:** Tiago Xavier (`tiago.xavier@prof.infnet.edu.br`)
-- **Aluno:** Miguel Andrade Wiest de São Pedro
+- **Grupo:** Miguel Andrade Wiest de São Pedro, Lorenzo Schönwald Lima, Lucas Garcia Ferro.
 - **Repositório Git:** Acessível publicamente / concedido acesso ao professor.
